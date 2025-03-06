@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
@@ -11,7 +10,7 @@ import FeatureCard from '@/components/FeatureCard';
 import { 
   Brain, 
   UserCircle2, 
-  MicrophoneIcon, 
+  Mic, 
   ImageIcon, 
   Utensils, 
   Activity, 
@@ -52,7 +51,7 @@ const Index = () => {
               <FeatureCard
                 title="Voice Health Assistant"
                 description="Get real-time health guidance through our advanced voice-enabled AI assistant."
-                icon={<MicrophoneIcon className="h-6 w-6" />}
+                icon={<Mic className="h-6 w-6" />}
                 delay={300}
               />
               <FeatureCard
