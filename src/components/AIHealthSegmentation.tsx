@@ -1,85 +1,105 @@
 
 import React, { useState, useEffect } from 'react';
-import { Activity, Brain, PieChart, Users, Sparkles } from 'lucide-react';
+import { Activity, Stethoscope, PieChart, Users, Sparkles } from 'lucide-react';
 
 const clusters = [
   {
     id: 1,
-    name: 'Active Optimizers',
+    name: 'Active & Low-Risk Group',
     color: '#3B82F6',
     traits: [
-      'Regular exercise routine',
-      'Balanced diet with occasional indulgences',
-      'Moderate stress levels',
-      'Good sleep quality',
-      'Preventive health focus'
+      'Regular menstrual cycles',
+      'No chronic diseases (diabetes, thyroid)',
+      'Balanced diet & active lifestyle',
+      'Normal hormonal levels',
+      'Good sleep quality'
     ],
     recommendations: [
-      'Optimize exercise for specific goals',
-      'Fine-tune nutrition timing',
-      'Meditation for performance',
-      'Targeted supplements',
-      'Recovery optimization'
+      'Annual wellness checkups',
+      'Regular breast self-exams',
+      'Maintain current exercise routine',
+      'Continue balanced nutrition',
+      'Preventive health screenings'
     ],
-    percentage: 28
+    percentage: 30
   },
   {
     id: 2,
-    name: 'Wellness Seekers',
+    name: 'PCOS / Hormonal Imbalance Risk',
     color: '#10B981',
     traits: [
-      'Moderate activity levels',
-      'Health-conscious diet',
-      'Actively managing stress',
-      'Inconsistent sleep patterns',
-      'Proactive about health education'
+      'Irregular periods, acne, weight gain',
+      'High androgen levels (hair growth)',
+      'Insulin resistance or borderline diabetes',
+      'Difficulty losing weight',
+      'Mood fluctuations'
     ],
     recommendations: [
-      'Structured exercise program',
-      'Meal planning strategies',
-      'Sleep hygiene practices',
-      'Stress management techniques',
-      'Regular health screenings'
-    ],
-    percentage: 35
-  },
-  {
-    id: 3,
-    name: 'Balance Needers',
-    color: '#6366F1',
-    traits: [
-      'Inconsistent exercise habits',
-      'Convenience-focused diet',
-      'Elevated stress levels',
-      'Insufficient sleep',
-      'Reactive health approach'
-    ],
-    recommendations: [
-      'Low-barrier exercise routines',
-      'Simple nutrition improvements',
-      'Stress reduction techniques',
-      'Sleep environment optimization',
-      'Gradual lifestyle adjustments'
+      'Endocrinologist consultation',
+      'Anti-inflammatory diet plan',
+      'Regular insulin monitoring',
+      'Hormone-balancing supplements',
+      'Stress management techniques'
     ],
     percentage: 22
   },
   {
-    id: 4,
-    name: 'Health Prioritizers',
-    color: '#8B5CF6',
+    id: 3,
+    name: 'Menopause & Bone Health Risks',
+    color: '#6366F1',
     traits: [
-      'Limited physical activity',
-      'Nutrition challenges',
-      'High stress environment',
-      'Poor sleep quality',
-      'Managing health conditions'
+      'Perimenopausal or postmenopausal',
+      'Osteoporosis risk factors',
+      'Hot flashes, mood swings, joint pain',
+      'Sleep disturbances',
+      'Changing body composition'
     ],
     recommendations: [
-      'Gentle movement programs',
-      'Anti-inflammatory nutrition',
-      'Condition-specific support',
-      'Comprehensive health plan',
-      'Professional guidance'
+      'Bone density screening',
+      'Calcium and vitamin D supplements',
+      'Weight-bearing exercises',
+      'Hormone therapy evaluation',
+      'Menopause symptom management'
+    ],
+    percentage: 18
+  },
+  {
+    id: 4,
+    name: 'High-Stress & Metabolic Risk Group',
+    color: '#8B5CF6',
+    traits: [
+      'High cortisol (stress hormone)',
+      'Poor sleep quality',
+      'Increased risk of hypertension',
+      'Frequent fatigue and headaches',
+      'Digestion issues'
+    ],
+    recommendations: [
+      'Stress reduction program',
+      'Sleep hygiene improvement',
+      'Heart health screening',
+      'Anti-inflammatory nutrition plan',
+      'Regular physical activity'
+    ],
+    percentage: 15
+  },
+  {
+    id: 5,
+    name: 'Pregnancy & Postpartum Care',
+    color: '#EC4899',
+    traits: [
+      'Expecting mothers or recently postpartum',
+      'Nutritional needs for maternal health',
+      'Postpartum depression risk factors',
+      'Physical recovery needs',
+      'New parenting adjustment'
+    ],
+    recommendations: [
+      'Prenatal/postnatal nutrition plan',
+      'Mental health support resources',
+      'Gentle postpartum exercise routine',
+      'Breastfeeding support if needed',
+      'Regular pediatric checkups'
     ],
     percentage: 15
   }
@@ -102,12 +122,12 @@ const AIHealthSegmentation = () => {
       <div className="container-custom mx-auto">
         <div className="text-center mb-16 animate-fade-in">
           <div className="inline-flex items-center px-3 py-1.5 rounded-full bg-wellness-blue/10 text-wellness-blue mb-4">
-            <Brain className="h-4 w-4 mr-2" />
-            <span className="text-sm font-medium">AI Health Segmentation</span>
+            <Stethoscope className="h-4 w-4 mr-2" />
+            <span className="text-sm font-medium">Women's Health Clustering</span>
           </div>
-          <h2 className="heading-2 mb-4">Advanced Analysis & Health Clusters</h2>
+          <h2 className="heading-2 mb-4">Proposed Health Clusters for Women's Health</h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Our AI system uses hierarchical clustering and Gaussian Mixture Models to group users into dynamic health profiles.
+            Our AI system uses Gaussian Mixture Models to dynamically refine these health profiles for personalized care.
           </p>
         </div>
 
@@ -224,8 +244,8 @@ const AIHealthSegmentation = () => {
                   })}
                 </div>
                 <div className="flex justify-between mt-2">
-                  <span className="text-xs text-gray-500">Focused on prevention</span>
-                  <span className="text-xs text-gray-500">Urgent health needs</span>
+                  <span className="text-xs text-gray-500">Low health risk</span>
+                  <span className="text-xs text-gray-500">Needs specialized care</span>
                 </div>
               </div>
             </div>
