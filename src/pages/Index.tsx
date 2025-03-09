@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
@@ -7,17 +8,6 @@ import AIHealthSegmentation from '@/components/AIHealthSegmentation';
 import VoiceChatbot from '@/components/VoiceChatbot';
 import WellnessDashboard from '@/components/WellnessDashboard';
 import { ArrowUp } from 'lucide-react';
-import FeatureCard from '@/components/FeatureCard';
-import { 
-  Brain, 
-  UserCircle2, 
-  Mic, 
-  ImageIcon, 
-  Utensils, 
-  Activity, 
-  Trophy, 
-  LockIcon 
-} from 'lucide-react';
 
 const Index = () => {
   return (
@@ -33,68 +23,6 @@ const Index = () => {
         <WellnessDashboard />
         <AIHealthSegmentation />
         <VoiceChatbot />
-        
-        <section id="features" className="py-20 bg-gray-50">
-          <div className="container-custom mx-auto">
-            <div className="text-center mb-16 animate-fade-in">
-              <h2 className="heading-2 mb-4">Comprehensive Health & Wellness</h2>
-              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                Our AI-powered platform provides a holistic approach to health management with innovative features.
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <FeatureCard
-                title="AI Health Segmentation"
-                description="Advanced clustering and GMM algorithms group users into health profiles for personalized care."
-                icon={<Brain className="h-6 w-6" />}
-                delay={100}
-              />
-              <FeatureCard
-                title="Doctor Matching"
-                description="Connect with healthcare professionals specialized in your specific health cluster."
-                icon={<UserCircle2 className="h-6 w-6" />}
-                delay={200}
-              />
-              <FeatureCard
-                title="Voice Health Assistant"
-                description="Get real-time health guidance through our advanced voice-enabled AI assistant."
-                icon={<Mic className="h-6 w-6" />}
-                delay={300}
-              />
-              <FeatureCard
-                title="Symptom Analysis"
-                description="AI image processing detects visible symptoms from photos for early intervention."
-                icon={<ImageIcon className="h-6 w-6" />}
-                delay={400}
-              />
-              <FeatureCard
-                title="Nutrition Plans"
-                description="Personalized nutrition recommendations based on your health profile and goals."
-                icon={<Utensils className="h-6 w-6" />}
-                delay={500}
-              />
-              <FeatureCard
-                title="Exercise Tracking"
-                description="Monitor your physical activity and receive form correction guidance."
-                icon={<Activity className="h-6 w-6" />}
-                delay={600}
-              />
-              <FeatureCard
-                title="Wellness Challenges"
-                description="Gamified health challenges to keep you motivated and accountable."
-                icon={<Trophy className="h-6 w-6" />}
-                delay={700}
-              />
-              <FeatureCard
-                title="HIPAA Compliant"
-                description="Enterprise-grade security ensures your health data remains private and protected."
-                icon={<LockIcon className="h-6 w-6" />}
-                delay={800}
-              />
-            </div>
-          </div>
-        </section>
         
         <section className="py-20 bg-wellness-blue text-white">
           <div className="container-custom mx-auto text-center">
