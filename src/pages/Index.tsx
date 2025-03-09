@@ -28,6 +28,13 @@ const Index = () => {
       <main>
         <HeroSection />
         
+        {/* Comment out the general health assessment in favor of the women's health form */}
+        {/* <HealthAssessment /> */}
+        <WomensHealthForm />
+        <AIHealthSegmentation />
+        <VoiceChatbot />
+        <WellnessDashboard />
+        
         <section id="features" className="py-20 bg-gray-50">
           <div className="container-custom mx-auto">
             <div className="text-center mb-16 animate-fade-in">
@@ -89,13 +96,6 @@ const Index = () => {
             </div>
           </div>
         </section>
-        
-        {/* Comment out the general health assessment in favor of the women's health form */}
-        {/* <HealthAssessment /> */}
-        <WomensHealthForm />
-        <AIHealthSegmentation />
-        <VoiceChatbot />
-        <WellnessDashboard />
         
         <section className="py-20 bg-wellness-blue text-white">
           <div className="container-custom mx-auto text-center">
