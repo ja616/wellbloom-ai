@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
@@ -31,9 +30,9 @@ const Index = () => {
         {/* Comment out the general health assessment in favor of the women's health form */}
         {/* <HealthAssessment /> */}
         <WomensHealthForm />
+        <WellnessDashboard />
         <AIHealthSegmentation />
         <VoiceChatbot />
-        <WellnessDashboard />
         
         <section id="features" className="py-20 bg-gray-50">
           <div className="container-custom mx-auto">
