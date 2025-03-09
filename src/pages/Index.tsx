@@ -1,7 +1,9 @@
+
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
 import HealthAssessment from '@/components/HealthAssessment';
+import WomensHealthForm from '@/components/WomensHealthForm';
 import AIHealthSegmentation from '@/components/AIHealthSegmentation';
 import VoiceChatbot from '@/components/VoiceChatbot';
 import WellnessDashboard from '@/components/WellnessDashboard';
@@ -88,7 +90,9 @@ const Index = () => {
           </div>
         </section>
         
-        <HealthAssessment />
+        {/* Comment out the general health assessment in favor of the women's health form */}
+        {/* <HealthAssessment /> */}
+        <WomensHealthForm />
         <AIHealthSegmentation />
         <VoiceChatbot />
         <WellnessDashboard />
