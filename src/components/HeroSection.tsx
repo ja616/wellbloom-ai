@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ArrowRight, Heart, Sparkles, Activity, Zap } from 'lucide-react';
 
@@ -10,13 +9,13 @@ const HeroSection = () => {
           <div className="animate-fade-in-up">
             <div className="inline-flex items-center px-3 py-1.5 rounded-full bg-wellness-blue/10 text-wellness-blue mb-6">
               <Sparkles className="h-4 w-4 mr-2" />
-              <span className="text-sm font-medium">AI-Powered Health Platform</span>
+              <span className="text-sm font-medium">AI-Powered Women's Health Platform</span>
             </div>
             <h1 className="heading-1 mb-6 text-gray-900">
               Your Personal <span className="text-wellness-blue">AI Health</span> Companion
             </h1>
             <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-lg">
-              Advanced AI analysis of your health data to provide personalized wellness plans, connect with specialists, and guide you to optimal health.
+              Advanced AI analysis of your health data to provide personalized wellness plans designed specifically for women's health needs.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <button className="btn-primary flex items-center justify-center">

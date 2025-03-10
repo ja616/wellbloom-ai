@@ -29,16 +29,16 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16 md:h-20">
           <Link to="/" className="flex items-center space-x-2">
             <div className="h-8 w-8 md:h-10 md:w-10 bg-wellness-blue rounded-lg flex items-center justify-center text-white font-semibold text-xl">
-              W
+              H
             </div>
-            <span className="font-semibold text-lg md:text-xl">WellBloom AI</span>
+            <span className="font-semibold text-lg md:text-xl">HerHealth AI</span>
           </Link>
 
           <nav className="hidden md:flex items-center space-x-8">
-            <NavLink href="#features">Features</NavLink>
             <NavLink href="#assessment">Assessment</NavLink>
-            <NavLink href="#ai-segmentation">AI Analysis</NavLink>
             <NavLink href="#dashboard">Dashboard</NavLink>
+            <NavLink href="#ai-segmentation">Health Clusters</NavLink>
+            <NavLink href="#voice-chatbot">Voice Assistant</NavLink>
             <button className="btn-primary">Get Started <ArrowRight className="ml-2 h-4 w-4 inline" /></button>
           </nav>
 
@@ -63,10 +63,10 @@ const Navbar = () => {
         )}
       >
         <nav className="flex flex-col space-y-6 p-8">
-          <MobileNavLink href="#features" onClick={() => setIsOpen(false)}>Features</MobileNavLink>
           <MobileNavLink href="#assessment" onClick={() => setIsOpen(false)}>Assessment</MobileNavLink>
-          <MobileNavLink href="#ai-segmentation" onClick={() => setIsOpen(false)}>AI Analysis</MobileNavLink>
           <MobileNavLink href="#dashboard" onClick={() => setIsOpen(false)}>Dashboard</MobileNavLink>
+          <MobileNavLink href="#ai-segmentation" onClick={() => setIsOpen(false)}>Health Clusters</MobileNavLink>
+          <MobileNavLink href="#voice-chatbot" onClick={() => setIsOpen(false)}>Voice Assistant</MobileNavLink>
           <button className="btn-primary mt-4">
             Get Started <ArrowRight className="ml-2 h-4 w-4 inline" />
           </button>
