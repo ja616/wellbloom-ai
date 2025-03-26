@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowRight, Heart, Sparkles, Activity, Zap } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const HeroSection = () => {
   return (
@@ -18,13 +19,10 @@ const HeroSection = () => {
               Advanced AI analysis of your health data to provide personalized wellness plans designed specifically for women's health needs.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="btn-primary flex items-center justify-center">
+              <Link to="/login" className="btn-primary flex items-center justify-center">
                 Start Health Assessment
                 <ArrowRight className="ml-2 h-5 w-5" />
-              </button>
-              <button className="btn-secondary flex items-center justify-center">
-                Learn How It Works
-              </button>
+              </Link>
             </div>
             <div className="mt-10 grid grid-cols-3 gap-4">
               <StatItem icon={<Heart className="h-5 w-5 text-wellness-blue" />} label="Health Clustering" value="98%" />

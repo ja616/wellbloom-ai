@@ -39,7 +39,7 @@ const Navbar = () => {
             <NavLink href="#dashboard">Dashboard</NavLink>
             <NavLink href="#ai-segmentation">Health Clusters</NavLink>
             <NavLink href="#voice-chatbot">Voice Assistant</NavLink>
-            <button className="btn-primary">Get Started <ArrowRight className="ml-2 h-4 w-4 inline" /></button>
+            <Link to="/login" className="btn-primary">Get Started <ArrowRight className="ml-2 h-4 w-4 inline" /></Link>
           </nav>
 
           <button
@@ -67,9 +67,9 @@ const Navbar = () => {
           <MobileNavLink href="#dashboard" onClick={() => setIsOpen(false)}>Dashboard</MobileNavLink>
           <MobileNavLink href="#ai-segmentation" onClick={() => setIsOpen(false)}>Health Clusters</MobileNavLink>
           <MobileNavLink href="#voice-chatbot" onClick={() => setIsOpen(false)}>Voice Assistant</MobileNavLink>
-          <button className="btn-primary mt-4">
+          <Link to="/login" className="btn-primary mt-4" onClick={() => setIsOpen(false)}>
             Get Started <ArrowRight className="ml-2 h-4 w-4 inline" />
-          </button>
+          </Link>
         </nav>
       </div>
     </header>

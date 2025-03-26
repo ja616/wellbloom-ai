@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, ArrowLeft, Check, UserCircle2, HeartPulse, Leaf, Pill } from 'lucide-react';
+import { ArrowRight, ArrowLeft, Check, UserCircle2, HeartPulse, Leaf, Pill, Brain, CalendarCheck } from 'lucide-react';
 
 type FormSection = {
   id: string;
@@ -13,76 +13,208 @@ type FormSection = {
 type FormQuestion = {
   id: string;
   question: string;
-  type: 'radio' | 'checkbox' | 'select' | 'number' | 'text';
+  type: 'radio' | 'checkbox' | 'select' | 'number' | 'text' | 'textarea';
   options?: string[];
   placeholder?: string;
   min?: number;
   max?: number;
   unit?: string;
+  conditional?: {
+    dependsOn: string;
+    showWhen: string;
+  };
 };
 
 const womensHealthFormSections: FormSection[] = [
   {
     id: 'general',
-    title: '🌿 General Information',
+    title: '1️⃣ General Information',
     icon: <UserCircle2 className="h-6 w-6" />,
     questions: [
       {
         id: 'age',
-        question: 'What is your age?',
-        type: 'number',
-        min: 18,
-        max: 120
+        question: 'Age',
+        type: 'select',
+        options: ['18-24', '25-34', '35-44', '45-54', '55+']
       },
       {
         id: 'height',
-        question: 'What is your height?',
+        question: 'Height (cm)',
         type: 'number',
-        unit: 'cm',
         min: 120,
         max: 220
       },
       {
         id: 'weight',
-        question: 'What is your weight?',
+        question: 'Weight (kg)',
         type: 'number',
-        unit: 'kg',
         min: 30,
         max: 250
       },
       {
-        id: 'activityLevel',
-        question: 'What is your typical daily activity level?',
-        type: 'radio',
-        options: [
-          'Sedentary (little to no exercise)',
-          'Lightly active (light exercise 1–3 days per week)',
-          'Moderately active (moderate exercise 3–5 days per week)',
-          'Very active (intense exercise 6–7 days per week)',
-          'Super active (athlete, physical job)'
-        ]
-      },
-      {
-        id: 'sleepHours',
-        question: 'How many hours of sleep do you get per night?',
-        type: 'radio',
-        options: [
-          'Less than 5 hours',
-          '5–6 hours',
-          '6–7 hours',
-          '7–8 hours',
-          'More than 8 hours'
-        ]
-      },
-      {
-        id: 'sleepDisturbances',
-        question: 'Do you experience sleep disturbances (e.g., insomnia, waking up frequently)?',
+        id: 'allergies',
+        question: 'Do you have any known allergies?',
         type: 'radio',
         options: ['Yes', 'No']
       },
       {
-        id: 'healthTracking',
-        question: 'Do you track your health regularly (e.g., fitness apps, wearables)?',
+        id: 'allergiesDetails',
+        question: 'Please list your allergies',
+        type: 'textarea',
+        conditional: {
+          dependsOn: 'allergies',
+          showWhen: 'Yes'
+        }
+      },
+      {
+        id: 'familyHistory',
+        question: 'Do you have a family history of any medical conditions?',
+        type: 'checkbox',
+        options: ['Diabetes', 'Hypertension', 'Osteoporosis', 'PCOS', 'Depression', 'Heart Disease', 'None']
+      }
+    ]
+  },
+  {
+    id: 'lifestyle',
+    title: '2️⃣ Lifestyle & Nutrition',
+    icon: <Leaf className="h-6 w-6" />,
+    questions: [
+      {
+        id: 'exercise',
+        question: 'How often do you exercise?',
+        type: 'radio',
+        options: [
+          '🚶 Sedentary (Little to no exercise)',
+          '🏃 Light (1-2 times per week)',
+          '🏋️ Moderate (3-4 times per week)',
+          '🏆 Active (5+ times per week)'
+        ]
+      },
+      {
+        id: 'sleep',
+        question: 'How many hours of sleep do you get per night?',
+        type: 'radio',
+        options: ['Less than 4', '4-6', '6-8', 'More than 8']
+      },
+      {
+        id: 'water',
+        question: 'How would you rate your daily water intake?',
+        type: 'radio',
+        options: ['Less than 1L', '1-2L', '2-3L', 'More than 3L']
+      },
+      {
+        id: 'diet',
+        question: 'Do you follow any specific diet?',
+        type: 'radio',
+        options: ['Balanced', 'Keto', 'Vegan', 'High-Protein', 'Low-Carb', 'Other']
+      },
+      {
+        id: 'dairy',
+        question: 'How often do you consume dairy products?',
+        type: 'radio',
+        options: ['Never', 'Rarely', 'Sometimes', 'Daily']
+      }
+    ]
+  },
+  {
+    id: 'bone',
+    title: '3️⃣ Bone Health (Osteoporosis & Joint Issues)',
+    icon: <CalendarCheck className="h-6 w-6" />,
+    questions: [
+      {
+        id: 'jointPain',
+        question: 'Do you experience frequent joint or back pain?',
+        type: 'radio',
+        options: ['Yes', 'No']
+      },
+      {
+        id: 'fractures',
+        question: 'Have you had any bone fractures in the past 5 years?',
+        type: 'radio',
+        options: ['Yes', 'No']
+      },
+      {
+        id: 'calcium',
+        question: 'Do you consume calcium-rich foods (milk, cheese, leafy greens) regularly?',
+        type: 'radio',
+        options: ['Yes', 'No']
+      },
+      {
+        id: 'vitaminD',
+        question: 'Do you take vitamin D supplements?',
+        type: 'radio',
+        options: ['Yes', 'No']
+      }
+    ]
+  },
+  {
+    id: 'menstrual',
+    title: '4️⃣ Menstrual & Hormonal Health',
+    icon: <HeartPulse className="h-6 w-6" />,
+    questions: [
+      {
+        id: 'menstrualCycle',
+        question: 'How regular is your menstrual cycle?',
+        type: 'radio',
+        options: [
+          'Regular (28-32 days)',
+          'Irregular (Varies significantly)',
+          'Missed Periods (No periods for 3+ months)',
+          'Postmenopausal'
+        ]
+      },
+      {
+        id: 'cramps',
+        question: 'Do you experience severe menstrual cramps (dysmenorrhea)?',
+        type: 'radio',
+        options: ['Yes', 'No']
+      },
+      {
+        id: 'pcos',
+        question: 'Have you been diagnosed with PCOS (Polycystic Ovary Syndrome)?',
+        type: 'radio',
+        options: ['Yes', 'No']
+      },
+      {
+        id: 'hormonal',
+        question: 'Do you experience excessive hair growth, acne, or weight fluctuations?',
+        type: 'radio',
+        options: ['Yes', 'No']
+      }
+    ]
+  },
+  {
+    id: 'mental',
+    title: '5️⃣ Mental & Emotional Well-being',
+    icon: <Brain className="h-6 w-6" />,
+    questions: [
+      {
+        id: 'stress',
+        question: 'How often do you feel stressed or anxious?',
+        type: 'radio',
+        options: ['Never', 'Sometimes', 'Often', 'Always']
+      },
+      {
+        id: 'moodSwings',
+        question: 'Do you experience mood swings or irritability?',
+        type: 'radio',
+        options: ['Yes', 'No']
+      },
+      {
+        id: 'sleepStress',
+        question: 'Do you have difficulty sleeping due to stress?',
+        type: 'radio',
+        options: ['Yes', 'No']
+      },
+      {
+        id: 'mentalDiagnosis',
+        question: 'Have you ever been diagnosed with depression or anxiety?',
+        type: 'radio',
+        options: ['Yes', 'No']
+      },
+      {
+        id: 'mentalRecommendations',
+        question: 'Would you like mental wellness recommendations?',
         type: 'radio',
         options: ['Yes', 'No']
       }
@@ -90,232 +222,46 @@ const womensHealthFormSections: FormSection[] = [
   },
   {
     id: 'reproductive',
-    title: '🩸 Reproductive Health',
-    icon: <HeartPulse className="h-6 w-6" />,
-    questions: [
-      {
-        id: 'menstrualCycle',
-        question: 'How would you describe your menstrual cycle?',
-        type: 'radio',
-        options: [
-          'Regular (predictable, occurs every 25–35 days)',
-          'Irregular (unpredictable, varies month to month)',
-          'Absent (haven\'t had a period in months)',
-          'Not applicable'
-        ]
-      },
-      {
-        id: 'periodLength',
-        question: 'What is the average length of your period?',
-        type: 'radio',
-        options: [
-          '2–3 days',
-          '4–5 days',
-          '6–7 days',
-          'More than 7 days',
-          'Not applicable'
-        ]
-      },
-      {
-        id: 'menstrualSymptoms',
-        question: 'Do you experience any of the following menstrual symptoms?',
-        type: 'checkbox',
-        options: [
-          'Heavy flow',
-          'Light flow',
-          'Severe cramps',
-          'Bloating',
-          'Fatigue',
-          'None of the above',
-          'Not applicable'
-        ]
-      },
-      {
-        id: 'pcos',
-        question: 'Have you been diagnosed with or suspect you have PCOS (Polycystic Ovary Syndrome)?',
-        type: 'radio',
-        options: [
-          'Yes, diagnosed',
-          'No, but I suspect it',
-          'No',
-          'Not applicable'
-        ]
-      },
-      {
-        id: 'pcosSymptoms',
-        question: 'If yes to PCOS, what symptoms do you experience?',
-        type: 'checkbox',
-        options: [
-          'Irregular periods',
-          'Acne',
-          'Unwanted hair growth (face, body)',
-          'Hair thinning/loss',
-          'Weight gain/difficulty losing weight',
-          'Insulin resistance or diabetes',
-          'Not applicable'
-        ]
-      },
-      {
-        id: 'endometriosis',
-        question: 'Have you been diagnosed with endometriosis?',
-        type: 'radio',
-        options: ['Yes', 'No', 'Not applicable']
-      },
-      {
-        id: 'pelvicPain',
-        question: 'Do you experience chronic pelvic pain or painful periods?',
-        type: 'radio',
-        options: ['Yes', 'No', 'Not applicable']
-      },
-      {
-        id: 'pregnancyStatus',
-        question: 'Are you currently pregnant, trying to conceive, or postpartum?',
-        type: 'radio',
-        options: [
-          'Pregnant',
-          'Trying to conceive',
-          'Postpartum (within 1 year of delivery)',
-          'None of the above'
-        ]
-      }
-    ]
-  },
-  {
-    id: 'lifestyle',
-    title: '⚕️ Lifestyle & Risk Factors',
-    icon: <Leaf className="h-6 w-6" />,
-    questions: [
-      {
-        id: 'diet',
-        question: 'What best describes your diet?',
-        type: 'radio',
-        options: [
-          'Vegetarian',
-          'Vegan',
-          'Balanced (mix of plant-based & animal-based foods)',
-          'High-processed food intake'
-        ]
-      },
-      {
-        id: 'fruitVegetables',
-        question: 'How many servings of fruits and vegetables do you eat per day?',
-        type: 'radio',
-        options: [
-          '0–1 servings',
-          '2–3 servings',
-          '4+ servings'
-        ]
-      },
-      {
-        id: 'waterIntake',
-        question: 'How much water do you drink per day?',
-        type: 'radio',
-        options: [
-          'Less than 1 liter (4 glasses)',
-          '1–2 liters (4–8 glasses)',
-          '2–3 liters (8–12 glasses)',
-          'More than 3 liters'
-        ]
-      },
-      {
-        id: 'stressLevel',
-        question: 'Do you experience high stress levels?',
-        type: 'radio',
-        options: [
-          'Low stress (rarely feel stressed)',
-          'Moderate stress (sometimes feel overwhelmed)',
-          'High stress (frequently anxious or overwhelmed)'
-        ]
-      },
-      {
-        id: 'stressManagement',
-        question: 'How do you manage stress?',
-        type: 'checkbox',
-        options: [
-          'Meditation or yoga',
-          'Exercise',
-          'Talking to a friend/family',
-          'Therapy',
-          'I don\'t actively manage stress'
-        ]
-      },
-      {
-        id: 'alcohol',
-        question: 'Do you consume alcohol?',
-        type: 'radio',
-        options: [
-          'Never',
-          'Occasionally (1–2 times per month)',
-          'Weekly (1–2 times per week)',
-          'Regularly (3+ times per week)'
-        ]
-      },
-      {
-        id: 'smoking',
-        question: 'Do you smoke or use tobacco products?',
-        type: 'radio',
-        options: [
-          'Yes, regularly',
-          'Occasionally',
-          'No'
-        ]
-      },
-      {
-        id: 'digestiveIssues',
-        question: 'Do you frequently experience digestive issues (bloating, constipation, acid reflux)?',
-        type: 'radio',
-        options: ['Yes', 'No']
-      }
-    ]
-  },
-  {
-    id: 'medical',
-    title: '💊 Medical History & Symptoms',
+    title: '6️⃣ Reproductive Health',
     icon: <Pill className="h-6 w-6" />,
     questions: [
       {
-        id: 'conditions',
-        question: 'Have you been diagnosed with any of the following conditions?',
-        type: 'checkbox',
-        options: [
-          'Thyroid disorder (hypothyroidism/hyperthyroidism)',
-          'Diabetes (Type 1 or Type 2)',
-          'High blood pressure',
-          'High cholesterol',
-          'Heart disease',
-          'Osteoporosis or low bone density',
-          'Autoimmune disorder (e.g., lupus, rheumatoid arthritis)',
-          'None of the above'
-        ]
-      },
-      {
-        id: 'symptoms',
-        question: 'Do you frequently experience any of the following symptoms?',
-        type: 'checkbox',
-        options: [
-          'Fatigue or low energy',
-          'Hair loss or thinning',
-          'Sudden weight gain or loss',
-          'Mood swings or irritability',
-          'Poor concentration (brain fog)',
-          'Low libido (reduced interest in sex)',
-          'Sleep disturbances',
-          'Frequent headaches or migraines',
-          'Joint pain or stiffness',
-          'None of the above'
-        ]
-      },
-      {
-        id: 'surgeries',
-        question: 'Have you had any major surgeries or hospitalizations in the past 5 years?',
+        id: 'pregnant',
+        question: 'Have you ever been pregnant?',
         type: 'radio',
         options: ['Yes', 'No']
       },
       {
-        id: 'medications',
-        question: 'Do you take any medications or supplements regularly?',
+        id: 'painIntercourse',
+        question: 'Do you experience any pain during intercourse?',
         type: 'radio',
         options: ['Yes', 'No']
+      },
+      {
+        id: 'papSmear',
+        question: 'Have you had a pap smear test in the last 2 years?',
+        type: 'radio',
+        options: ['Yes', 'No']
+      }
+    ]
+  },
+  {
+    id: 'symptoms',
+    title: '7️⃣ Symptom Tracking (For AI-Based Symptom Analysis)',
+    icon: <Pill className="h-6 w-6" />,
+    questions: [
+      {
+        id: 'currentSymptoms',
+        question: 'Do you currently experience any of the following?',
+        type: 'checkbox',
+        options: [
+          'Chronic fatigue',
+          'Unexplained weight gain/loss',
+          'Hair thinning or hair loss',
+          'Frequent headaches',
+          'Digestive issues (bloating, IBS)',
+          'None'
+        ]
       }
     ]
   }
@@ -396,7 +342,7 @@ const WomensHealthForm = () => {
   const currentFormSection = womensHealthFormSections[currentSection];
 
   return (
-    <section id="womens-health-form" className="py-20 bg-gradient-to-b from-purple-50 to-white">
+    <section id="assessment" className="py-20 bg-gradient-to-b from-purple-50 to-white">
       <div className="container-custom mx-auto">
         <div className="text-center mb-12 animate-fade-in">
           <h2 className="heading-2 mb-4">Women's Health Assessment</h2>
@@ -435,100 +381,122 @@ const WomensHealthForm = () => {
                 transition={{ duration: 0.3 }}
                 className="space-y-6"
               >
-                {currentFormSection.questions.map((question) => (
-                  <div key={question.id} className="p-4 bg-white rounded-xl shadow-sm">
-                    <label className="block text-base font-medium text-gray-700 mb-3">{question.question}</label>
-                    
-                    {question.type === 'radio' && (
-                      <div className="space-y-2">
-                        {question.options?.map((option) => (
-                          <div key={option} className="flex items-center">
-                            <input
-                              type="radio"
-                              id={`${question.id}-${option}`}
-                              name={question.id}
-                              value={option}
-                              checked={formData[question.id] === option}
-                              onChange={() => handleRadioChange(question.id, option)}
-                              className="h-4 w-4 text-purple-600 border-gray-300 focus:ring-purple-500"
-                            />
-                            <label htmlFor={`${question.id}-${option}`} className="ml-2 block text-sm text-gray-700">
-                              {option}
-                            </label>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                    
-                    {question.type === 'checkbox' && (
-                      <div className="space-y-2">
-                        {question.options?.map((option) => (
-                          <div key={option} className="flex items-center">
-                            <input
-                              type="checkbox"
-                              id={`${question.id}-${option}`}
-                              name={question.id}
-                              value={option}
-                              checked={selectedOptions[question.id]?.includes(option) || false}
-                              onChange={() => handleCheckboxChange(question.id, option)}
-                              className="h-4 w-4 text-purple-600 rounded border-gray-300 focus:ring-purple-500"
-                            />
-                            <label htmlFor={`${question.id}-${option}`} className="ml-2 block text-sm text-gray-700">
-                              {option}
-                            </label>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                    
-                    {question.type === 'number' && (
-                      <div className="flex items-center">
+                {currentFormSection.questions.map((question) => {
+                  // Check if this question should be displayed based on conditional logic
+                  if (question.conditional) {
+                    const { dependsOn, showWhen } = question.conditional;
+                    if (formData[dependsOn] !== showWhen) {
+                      return null;
+                    }
+                  }
+
+                  return (
+                    <div key={question.id} className="p-4 bg-white rounded-xl shadow-sm">
+                      <label className="block text-base font-medium text-gray-700 mb-3">{question.question}</label>
+                      
+                      {question.type === 'radio' && (
+                        <div className="space-y-2">
+                          {question.options?.map((option) => (
+                            <div key={option} className="flex items-center">
+                              <input
+                                type="radio"
+                                id={`${question.id}-${option}`}
+                                name={question.id}
+                                value={option}
+                                checked={formData[question.id] === option}
+                                onChange={() => handleRadioChange(question.id, option)}
+                                className="h-4 w-4 text-purple-600 border-gray-300 focus:ring-purple-500"
+                              />
+                              <label htmlFor={`${question.id}-${option}`} className="ml-2 block text-sm text-gray-700">
+                                {option}
+                              </label>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                      
+                      {question.type === 'checkbox' && (
+                        <div className="space-y-2">
+                          {question.options?.map((option) => (
+                            <div key={option} className="flex items-center">
+                              <input
+                                type="checkbox"
+                                id={`${question.id}-${option}`}
+                                name={question.id}
+                                value={option}
+                                checked={selectedOptions[question.id]?.includes(option) || false}
+                                onChange={() => handleCheckboxChange(question.id, option)}
+                                className="h-4 w-4 text-purple-600 rounded border-gray-300 focus:ring-purple-500"
+                              />
+                              <label htmlFor={`${question.id}-${option}`} className="ml-2 block text-sm text-gray-700">
+                                {option}
+                              </label>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                      
+                      {question.type === 'number' && (
+                        <div className="flex items-center">
+                          <input
+                            type="number"
+                            id={question.id}
+                            name={question.id}
+                            min={question.min}
+                            max={question.max}
+                            value={formData[question.id] || ''}
+                            onChange={(e) => handleInputChange(question.id, e.target.value)}
+                            className="form-input rounded-lg border-gray-300 focus:border-purple-500 focus:ring-purple-500"
+                          />
+                          {question.unit && (
+                            <span className="ml-2 text-sm text-gray-600">{question.unit}</span>
+                          )}
+                        </div>
+                      )}
+                      
+                      {question.type === 'text' && (
                         <input
-                          type="number"
+                          type="text"
                           id={question.id}
                           name={question.id}
-                          min={question.min}
-                          max={question.max}
+                          placeholder={question.placeholder}
                           value={formData[question.id] || ''}
                           onChange={(e) => handleInputChange(question.id, e.target.value)}
-                          className="form-input rounded-lg border-gray-300 focus:border-purple-500 focus:ring-purple-500"
+                          className="form-input w-full rounded-lg border-gray-300 focus:border-purple-500 focus:ring-purple-500"
                         />
-                        {question.unit && (
-                          <span className="ml-2 text-sm text-gray-600">{question.unit}</span>
-                        )}
-                      </div>
-                    )}
-                    
-                    {question.type === 'text' && (
-                      <input
-                        type="text"
-                        id={question.id}
-                        name={question.id}
-                        placeholder={question.placeholder}
-                        value={formData[question.id] || ''}
-                        onChange={(e) => handleInputChange(question.id, e.target.value)}
-                        className="form-input w-full rounded-lg border-gray-300 focus:border-purple-500 focus:ring-purple-500"
-                      />
-                    )}
-                    
-                    {question.type === 'select' && (
-                      <select
-                        id={question.id}
-                        name={question.id}
-                        value={formData[question.id] || ''}
-                        onChange={(e) => handleInputChange(question.id, e.target.value)}
-                        className="form-select w-full rounded-lg border-gray-300 focus:border-purple-500 focus:ring-purple-500"
-                      >
-                        <option value="">Select an option</option>
-                        {question.options?.map((option) => (
-                          <option key={option} value={option}>
-                            {option}
-                          </option>
-                        ))}
-                      </select>
-                    )}
-                  </div>
-                ))}
+                      )}
+                      
+                      {question.type === 'textarea' && (
+                        <textarea
+                          id={question.id}
+                          name={question.id}
+                          placeholder={question.placeholder}
+                          value={formData[question.id] || ''}
+                          onChange={(e) => handleInputChange(question.id, e.target.value)}
+                          rows={3}
+                          className="form-input w-full rounded-lg border-gray-300 focus:border-purple-500 focus:ring-purple-500"
+                        />
+                      )}
+                      
+                      {question.type === 'select' && (
+                        <select
+                          id={question.id}
+                          name={question.id}
+                          value={formData[question.id] || ''}
+                          onChange={(e) => handleInputChange(question.id, e.target.value)}
+                          className="form-select w-full rounded-lg border-gray-300 focus:border-purple-500 focus:ring-purple-500"
+                        >
+                          <option value="">Select an option</option>
+                          {question.options?.map((option) => (
+                            <option key={option} value={option}>
+                              {option}
+                            </option>
+                          ))}
+                        </select>
+                      )}
+                    </div>
+                  );
+                })}
               </motion.div>
 
               <div className="flex justify-between mt-8">
@@ -584,10 +552,10 @@ const WomensHealthForm = () => {
                 Thank you for completing the women's health assessment. Our AI is analyzing your responses to generate personalized health recommendations.
               </p>
               <div className="flex justify-center">
-                <button className="px-6 py-3 flex items-center rounded-lg border border-transparent bg-purple-600 text-white shadow-sm hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2">
+                <a href="#dashboard" className="px-6 py-3 flex items-center rounded-lg border border-transparent bg-purple-600 text-white shadow-sm hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2">
                   View Your Health Profile
                   <ArrowRight className="ml-2 h-4 w-4" />
-                </button>
+                </a>
               </div>
             </motion.div>
           )}
